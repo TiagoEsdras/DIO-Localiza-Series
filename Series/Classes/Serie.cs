@@ -30,5 +30,15 @@ namespace Series
 
             return retorno;
         }
-    }
+
+        public string retornaTitulo()
+        {
+            return this.Titulo;
+        }
+
+        public int retornaId()
+        {
+            return this.Id;
+        }
+}
 }
