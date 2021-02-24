@@ -56,51 +56,54 @@ namespace Series
             {
                 Console.WriteLine("#ID {0}: - {1}", serie.retornaId(), serie.retornaTitulo());
             }
+            Console.WriteLine();
             return true;
         }
         private static void InserirSerie()
         {
             int id = repositorio.ProximoId();
-            SetarDadosSerie(id);
+            SetarDadosSerie(id, "inserir");
         }
         private static void AtualizarSerie()
         {
-            bool existeSerie = ListarSeries();
-            if(existeSerie)
+            if(ExisteSerie())
             {
-                ListarSeries();
                 Console.WriteLine();
-                Console.Write("Digite o id da série a ser atualizada: ");
+                Console.Write("Digite o id da série a ser atualizada: ");                
                 int id = Convert.ToInt32(Console.ReadLine());
-                SetarDadosSerie(id);
-            }            
+                Console.WriteLine();
+                SetarDadosSerie(id, "atualizar");
+            }
+            Console.WriteLine();
         }
         private static void ExcluirSerie()
         {
-            bool existeSerie = ListarSeries();
-            if (existeSerie)
+            if (ExisteSerie())
             {
-                ListarSeries();
                 Console.WriteLine();
                 Console.Write("Digite o id da série a ser excluida: ");
+                Console.WriteLine();
                 int id = Convert.ToInt32(Console.ReadLine());
                 repositorio.Exclui(id);
             }            
         }
         private static void VisualizarSerie()
         {
-            ListarSeries();
+            if(ExisteSerie())
+            {                
+                Console.WriteLine();
+                Console.Write("Digite o id da série a ser exibida: ");
+                int id = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                var serie = repositorio.RetornaPorId(id);
+                Console.WriteLine(serie);
+            }
             Console.WriteLine();
-            Console.Write("Digite o id da série a ser exibida: ");
-            int id = Convert.ToInt32(Console.ReadLine());
-            var serie = repositorio.RetornaPorId(id);
-            Console.WriteLine(serie);
         }
         private static string ObterOpcaoUsuario()
-        {
-            Console.WriteLine();
+        {            
             Console.WriteLine("Informe a opção desejada");
-
+            Console.WriteLine();
             Console.WriteLine("1 - Listar Series");
             Console.WriteLine("2 - Inserir Serie");
             Console.WriteLine("3 - Atualizar Serie");
@@ -108,13 +111,12 @@ namespace Series
             Console.WriteLine("5 - Visualizar Serie");
             Console.WriteLine("C - Limpar Tela");
             Console.WriteLine("X - Sair");
-
+            Console.WriteLine();
             string opcao = Console.ReadLine().ToUpper();
             Console.WriteLine();
             return opcao;
         }
-
-        private static void SetarDadosSerie(int id)
+        private static void SetarDadosSerie(int id, string inserirOuAtualizar)
         {
             foreach (int value in Enum.GetValues(typeof(Genero)))
             {
@@ -136,8 +138,20 @@ namespace Series
 
             Serie serie = new Serie(id, (Genero)genero, titulo, descricao, ano);
 
-            repositorio.Insere(serie);
+            if(inserirOuAtualizar == "inserir")
+            {
+                repositorio.Insere(serie);
+            } 
+            else if (inserirOuAtualizar == "atualizar")
+            {
+                repositorio.Atualiza(id, serie);
+            }
+            
         }
-        
+        private static bool ExisteSerie()
+        {
+            bool existeSerie = ListarSeries();
+            return existeSerie;
+        }        
     }
 }
