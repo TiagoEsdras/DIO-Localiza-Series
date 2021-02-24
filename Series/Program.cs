@@ -17,13 +17,13 @@ namespace Series
                         ListarSeries();
                         break;
                     case "2":
-                        //InserirSerie();
+                        InserirSerie();
                         break;
                     case "3":
-                       // AtualizarSerie();
+                        AtualizarSerie();
                         break;
                     case "4":
-                       // ExcluiSerie();
+                        ExcluiSerie();
                         break;
                     case "5":
                         //VisualizarSerie();
@@ -35,13 +35,14 @@ namespace Series
                         throw new ArgumentOutOfRangeException();
                         
                 }
-
+                opcaoUsuario = ObterOpcaoUsuario();
             }
         }
 
-        public static void ListarSeries()
+        private static void ListarSeries()
         {
             Console.WriteLine("Lista de Series");
+            Console.WriteLine();
 
             var lista = repositorio.Lista();
 
@@ -55,6 +56,76 @@ namespace Series
             {
                 Console.WriteLine("#ID {0}: - {1}", serie.retornaId(), serie.retornaTitulo());
             }
+        }
+        private static void InserirSerie()
+        {
+            foreach (int value in Enum.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine(value + " - " + Enum.GetName(typeof(Genero), value));
+            }
+            Console.WriteLine();
+
+            Console.Write("Escolha o gênero dadas as opções acima: ");
+            int genero = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            Console.Write("Título: ");
+            string titulo = Console.ReadLine();
+            Console.WriteLine();
+
+            Console.Write("Descrição: ");
+            string descricao = Console.ReadLine();
+            Console.WriteLine();
+
+            Console.Write("Ano de Lançamento: ");
+            int ano = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            int id = repositorio.ProximoId();
+
+            Serie serie = new Serie(id, (Genero)genero, titulo, descricao, ano);
+
+            repositorio.Insere(serie);
+        }
+        private static void AtualizarSerie()
+        {
+            ListarSeries();
+            Console.WriteLine();
+            Console.Write("Digite o id da série a ser atualizada");
+            int id = Convert.ToInt32(Console.ReadLine());
+
+            foreach (int value in Enum.GetValues(typeof(Genero)))
+            {
+                Console.WriteLine(value + " - " + Enum.GetName(typeof(Genero), value));
+            }
+            Console.WriteLine();
+
+            Console.Write("Escolha o gênero dadas as opções acima: ");
+            int genero = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            Console.Write("Título: ");
+            string titulo = Console.ReadLine();
+            Console.WriteLine();
+
+            Console.Write("Descrição: ");
+            string descricao = Console.ReadLine();
+            Console.WriteLine();
+
+            Console.Write("Ano de Lançamento: ");
+            int ano = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();            
+
+            Serie serie = new Serie(id, (Genero)genero, titulo, descricao, ano);
+            repositorio.Atualiza(id, serie);
+        }
+        private static void ExcluiSerie()
+        {
+            ListarSeries();
+            Console.WriteLine();
+            Console.Write("Digite o id da série a ser excluida");
+            int id = Convert.ToInt32(Console.ReadLine());
+            repositorio.Exclui(id);
         }
 
         private static string ObterOpcaoUsuario()
@@ -74,5 +145,6 @@ namespace Series
             Console.WriteLine();
             return opcao;
         }
+        
     }
 }

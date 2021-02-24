@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Series
+﻿namespace Series
 {
     public enum Genero
     {
@@ -18,6 +14,6 @@ namespace Series
         Musical = 10,
         Romance = 11,
         Suspense = 12,
-        Terror = 13,
+        Terror = 13
     }
 }

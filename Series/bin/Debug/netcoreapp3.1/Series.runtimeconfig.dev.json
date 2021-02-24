@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\esdra\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\esdra\\.nuget\\packages"
+    ]
+  }
+}

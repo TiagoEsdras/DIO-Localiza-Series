@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Series
+﻿namespace Series
 {
     public class Serie : EntidadeBase
     {
@@ -28,7 +24,7 @@ namespace Series
             retorno += "Título: " + this.Titulo + "\n";
             retorno += "Descrição: " + this.Descricao + "\n";
             retorno += "Ano de lançamento: " + this.Ano;
-
+            retorno += "Excluído: " + this.Excluido;
             return retorno;
         }
 
