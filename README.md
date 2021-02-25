@@ -1,0 +1,1 @@
+Nesse projeto foi criado um algoritmo simples de cadastro de séries para praticar os conhecimentos de orientação a objetos, o principal paradigma de programação utilizada no mercado. Nesse projeto pude aprender: Como pensar orientado a objetos, como modelar o domínio, como utilizar recursos de coleção. Como extra desenvolvi de forma otimizada alguns blocos de códigos.
